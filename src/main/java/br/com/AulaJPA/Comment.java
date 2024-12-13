@@ -8,6 +8,7 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String comentario;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
@@ -21,6 +22,12 @@ public class Comment {
 	public Product getProduct() { return product; }
 
 	public void setProduct(Product product) { this.product = product; }
+	
+	public String getComentario() {return comentario; }
+	
+	public void setComentario(String comentario) { this.comentario = comentario; }
+	
+	
 	
 	
 }

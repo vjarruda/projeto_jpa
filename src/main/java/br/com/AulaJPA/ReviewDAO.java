@@ -6,22 +6,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class ProductDAO {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-baisc");
+public class ReviewDAO {
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-basic");
 	EntityManager em = emf.createEntityManager();
 	
-	public void salvar(Product product) { 
+	public void salvar(Review review) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(product);
+		em.persist(review);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public void atualizar(Product product) {
+	public void atualizar(Review review) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.merge(product);
+		em.merge(review);
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -29,25 +29,25 @@ public class ProductDAO {
 	public void remover(Long id) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Product product = em.find(Product.class, id);
-		if(product != null) {
-			em.remove(product);
+		Review review = em.find(Review.class, id);
+		if(review != null) {
+			em.remove(review);
 		}
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public List<Product> listar() {
+	public List<Review> listar() {
 		EntityManager em = emf.createEntityManager();
-		List<Product> products = em.createQuery("FROM Product", Product.class).getResultList();
+		List<Review> reviews = em.createQuery("From Review", Review.class).getResultList();
 		em.close();
-		return products;
+		return reviews;
 	}
 	
-	public Product buscarPorId(Long id) {
+	public Review buscarPorId(Long id) {
 		EntityManager em = emf.createEntityManager();
-		Product product  = em.find(Product.class, id);
+		Review review = em.find(Review.class, id);
 		em.close();
-		return product;
+		return review;
 	}
 }

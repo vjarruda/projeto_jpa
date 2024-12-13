@@ -14,7 +14,6 @@ public class Review {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
-	
 	//getters e setters
 	public Long getId() {return id;}
 

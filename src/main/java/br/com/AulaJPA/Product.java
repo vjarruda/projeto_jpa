@@ -13,7 +13,6 @@ public class Product {
 	private String nome;
 	private String descricao;
 	private Double preco;
-	private String tipo;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Review> reviews;
@@ -38,10 +37,6 @@ public class Product {
 	public Double getPreco() {return preco;}
 
 	public void setPreco(Double preco) {this.preco = preco;}
-
-	public String getTipo() {return tipo;}
-
-	public void setTipo(String tipo) {this.tipo = tipo;}
 
 	public List<Review> getReviews() {return reviews;}
 
