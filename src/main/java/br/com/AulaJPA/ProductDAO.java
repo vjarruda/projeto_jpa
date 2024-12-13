@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class ProductDAO {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-baisc");
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-basic");
 	EntityManager em = emf.createEntityManager();
 	
 	public void salvar(Product product) { 
