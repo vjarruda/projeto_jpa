@@ -1,5 +1,7 @@
 package br.com.AulaJPA;
 
+import java.util.ArrayList;
+
 public class MainAnthony {
     public static void main(String[] args) {
 
@@ -25,8 +27,18 @@ public class MainAnthony {
         brandDao.salvar(brand);
         brandDao.salvar(brand1);
 
+        Review review1 = new Review();
+        review1.setNota(5);
+
+        Review review2 = new Review();
+        review2.setNota(1);
 
         AverageRate rate = new AverageRate();
+        rate.setReviews(new ArrayList<Review>());
+        rate.getReviews().add(review1);
+        rate.getReviews().add(review2);
 
+        averageRateDAO.salvar(rate);
+  
     }
 }

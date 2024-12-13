@@ -3,6 +3,8 @@
         <class>br.com.AulaJPA.Comment</class>
         <class>br.com.AulaJPA.Product</class>
         <class>br.com.AulaJPA.Review</class>
+        <class>br.com.AulaJPA.Type</class>
+        <class>br.com.AulaJPA.Brand</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testdb"/>
