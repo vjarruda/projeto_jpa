@@ -19,6 +19,10 @@ public class Product {
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Comment> comments;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "type_id", referencedColumnName = "id")
+	private Type type;
 
 	
 	//getters e setters
@@ -45,5 +49,11 @@ public class Product {
 	public List<Comment> getComments() {return comments;}
 
 	public void setComments(List<Comment> comments) {this.comments = comments;}
+
+	public Type getType() {return type;}
+
+	public void setType(Type type) {this.type = type;}
+	
+	
 
 }

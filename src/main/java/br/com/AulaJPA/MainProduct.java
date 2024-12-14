@@ -6,10 +6,14 @@ public class MainProduct {
 	public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();
 		
+		Type type = new Type();
+		type.setType("Produto");
+		
 		Product product = new Product();
 		product.setNome("café");
 		product.setDescricao("Café preto em pó");
 		product.setPreco(10.50);
+		product.setType(type);
 		
 		Comment comment1 = new Comment();
 		comment1.setComentario("Muito bom");
