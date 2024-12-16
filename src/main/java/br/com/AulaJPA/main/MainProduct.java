@@ -9,13 +9,13 @@ import java.util.List;
 public class MainProduct {
 	public static void main(String[] args) {
 		Brand brand = new Brand();
-		brand.setName("Brand A");
+		brand.setName("Samsung");
 
 		Category category = new Category();
-		category.setName("Electronics");
+		category.setName("Eletrônicos");
 
 		Shop shop = new Shop();
-		shop.setName("Tech Store");
+		shop.setName("Magalu");
 		shop.setCnpj("12345678901234");
 
 		Type type = new Type();
@@ -23,7 +23,7 @@ public class MainProduct {
 
 		Product product = new Product();
 		product.setName("Smartphone X");
-		product.setDescription("A high-end smartphone with amazing features.");
+		product.setDescription("Celular TOP");
 		product.setPrice(1200.00);
 		product.setBrand(brand);
 		product.setCategory(category);
@@ -31,14 +31,14 @@ public class MainProduct {
 		product.setType(type);
 
 		Review review1 = new Review();
-		review1.setName("John Doe");
-		review1.setComment("Great product!");
+		review1.setName("Vini");
+		review1.setComment("Bom produto!");
 		review1.setRating(5);
 		review1.setProduct(product);
 
 		Review review2 = new Review();
-		review2.setName("Jane Smith");
-		review2.setComment("Good value for money.");
+		review2.setName("Anthony");
+		review2.setComment("Produto ok");
 		review2.setRating(4);
 		review2.setProduct(product);
 
