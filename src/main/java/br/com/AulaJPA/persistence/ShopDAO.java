@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class AverageRateDAO {
+public class ShopDAO {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-basic");
     EntityManager em = emf.createEntityManager();
 

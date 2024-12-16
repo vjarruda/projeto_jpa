@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class CommentDAO {
+public class CategoryDAO {
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-basic");
 	EntityManager em = emf.createEntityManager();
 	
