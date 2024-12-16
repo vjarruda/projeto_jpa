@@ -53,6 +53,6 @@ public class Review {
 	}
 
 	public void setProduct(Product products) {
-		this.product = products;
+		this.products = products;
 	}
 }

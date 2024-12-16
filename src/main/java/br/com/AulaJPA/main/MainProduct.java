@@ -1,52 +1,71 @@
 package br.com.AulaJPA.main;
 
-import br.com.AulaJPA.entities.Category;
-import br.com.AulaJPA.entities.Product;
-import br.com.AulaJPA.entities.Review;
-import br.com.AulaJPA.entities.Type;
+import br.com.AulaJPA.entities.*;
 import br.com.AulaJPA.persistence.ProductDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainProduct {
 	public static void main(String[] args) {
-		ProductDAO dao = new ProductDAO();
-		
+		Brand brand = new Brand();
+		brand.setName("Brand A");
+
+		Category category = new Category();
+		category.setName("Electronics");
+
+		Shop shop = new Shop();
+		shop.setName("Tech Store");
+		shop.setCnpj("12345678901234");
+
 		Type type = new Type();
-		type.setType("Produto");
-		
+		type.setName("Smartphone");
+
 		Product product = new Product();
-		product.setNome("café");
-		product.setDescricao("Café preto em pó");
-		product.setPreco(10.50);
+		product.setName("Smartphone X");
+		product.setDescription("A high-end smartphone with amazing features.");
+		product.setPrice(1200.00);
+		product.setBrand(brand);
+		product.setCategory(category);
+		product.setShop(shop);
 		product.setType(type);
-		
-		Category category1 = new Category();
-		category1.setComentario("Muito bom");
-		category1.setProduct(product);
-		
-		Category category2 = new Category();
-		category2.setComentario("Ruim");
-		category2.setProduct(product);
-		
+
 		Review review1 = new Review();
-		review1.setNota(5);
+		review1.setName("John Doe");
+		review1.setComment("Great product!");
+		review1.setRating(5);
 		review1.setProduct(product);
-		
+
 		Review review2 = new Review();
-		review2.setNota(1);
+		review2.setName("Jane Smith");
+		review2.setComment("Good value for money.");
+		review2.setRating(4);
 		review2.setProduct(product);
+
+		List<Review> reviews = new ArrayList<>();
+		reviews.add(review1);
+		reviews.add(review2);
+		product.setReviews(reviews);
+
+		ProductDAO productDAO = new ProductDAO();
+
+		productDAO.salvar(product);
+		System.out.println("Produto salvo com sucesso!");
+
+		List<Product> products = productDAO.listar();
+		System.out.println("Lista de produtos:");
+		for (Product p : products) {
+			System.out.println("- " + p.getName() + ": " + p.getDescription());
+		}
+
+		product.setPrice(1100.00);
+		productDAO.atualizar(product);
+		System.out.println("Produto atualizado com sucesso!");
 		
-		product.setComments(new ArrayList<Category>());
-		product.getComments().add(category1);
-		product.getComments().add(category2);
-		
-		
-		product.setReviews(new ArrayList<Review>());
-		product.getReviews().add(review1);
-		product.getReviews().add(review2);
-		
-		dao.salvar(product);
+		Product foundProduct = productDAO.buscarPorId(product.getId());
+		if (foundProduct != null) {
+			System.out.println("Produto encontrado: " + foundProduct.getName());
+		}
 		
 		
 	}

@@ -1,6 +1,6 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
     <persistence-unit name="crud-basic">
-        <class>br.com.AulaJPA.entities.Comment</class>
+        <class>br.com.AulaJPA.entities.Category</class>
         <class>br.com.AulaJPA.entities.Product</class>
         <class>br.com.AulaJPA.entities.Review</class>
         <class>br.com.AulaJPA.entities.Type</class>

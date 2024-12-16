@@ -1,4 +1,4 @@
-package br.com.AulaJPA.main;
+/*package br.com.AulaJPA.main;
 
 import br.com.AulaJPA.entities.Shop;
 import br.com.AulaJPA.entities.Brand;
@@ -49,4 +49,4 @@ public class MainAnthony {
         averageRateDAO.salvar(rate);
 
     }
-}
+}*/
