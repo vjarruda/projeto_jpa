@@ -8,30 +8,51 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Integer nota;
+	private String name;
+	private String comment;
+	private Integer rating;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
-	private Product product;
+	private Product products;
 
-	@ManyToOne
-	@JoinColumn(name = "average_rate_id")
-	private AverageRate averageRate;
+	public Long getId() {
+		return id;
+	}
 
-	// Getters e Setters
-	public Long getId() { return id; }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-	public void setId(Long id) { this.id = id; }
+	public String getName() {
+		return name;
+	}
 
-	public Integer getNota() { return nota; }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	public void setNota(Integer nota) { this.nota = nota; }
+	public String getComment() {
+		return comment;
+	}
 
-	public Product getProduct() { return product; }
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
-	public void setProduct(Product product) { this.product = product; }
+	public Integer getRating() {
+		return rating;
+	}
 
-	public AverageRate getAverageRate() { return averageRate; }
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
 
-	public void setAverageRate(AverageRate averageRate) { this.averageRate = averageRate; }
+	public Product getProduct() {
+		return products;
+	}
+
+	public void setProduct(Product products) {
+		this.product = products;
+	}
 }

@@ -1,31 +1,40 @@
 package br.com.AulaJPA.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Type {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
-    private String type;
-    
-    @OneToOne(mappedBy = "type")
-    private Product product;
+    private String name;
 
-    public long getId() {return id;}
+    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
+    private List<Product> products;
 
-    public void setId(long id) {this.id = id;}
+    public long getId() {
+        return id;
+    }
 
-    public String getType() {return type;}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public void setType(String type) {this.type = type;}
+    public String getName() {
+        return name;
+    }
 
-	public Product getProduct() {return product;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setProduct(Product product) {this.product = product;}
-    
-    
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 }

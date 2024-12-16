@@ -1,6 +1,6 @@
 package br.com.AulaJPA.main;
 
-import br.com.AulaJPA.entities.AverageRate;
+import br.com.AulaJPA.entities.Shop;
 import br.com.AulaJPA.entities.Brand;
 import br.com.AulaJPA.entities.Review;
 import br.com.AulaJPA.entities.Type;
@@ -41,7 +41,7 @@ public class MainAnthony {
         Review review2 = new Review();
         review2.setNota(1);
 
-        AverageRate rate = new AverageRate();
+        Shop rate = new Shop();
         rate.setReviews(new ArrayList<Review>());
         rate.getReviews().add(review1);
         rate.getReviews().add(review2);

@@ -1,8 +1,7 @@
 package br.com.AulaJPA.entities;
 
-import java.util.List;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -10,50 +9,98 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private String nome;
-	private String descricao;
-	private Double preco;
+	private String name;
+	private String description;
+	private Double price;
+
+	@ManyToOne
+	@JoinColumn(name = "brand_id")
+	private Brand brand;
+
+	@ManyToOne
+	@JoinColumn(name = "type_id")
+	private Type type;
+
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+
+	@ManyToOne
+	@JoinColumn(name = "shop_id")
+	private Shop shop;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Review> reviews;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<Comment> comments;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "type_id", referencedColumnName = "id")
-	private Type type;
+	public long getId() {
+		return id;
+	}
 
-	
-	//getters e setters
-	public long getId() { return id; }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-	public void setId(long id) {this.id = id;}
+	public String getName() {
+		return name;
+	}
 
-	public String getNome() {return nome;}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	public void setNome(String nome) {this.nome = nome;}
+	public String getDescription() {
+		return description;
+	}
 
-	public String getDescricao() {return descricao;}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-	public void setDescricao(String descricao) {this.descricao = descricao;}
+	public Double getPrice() {
+		return price;
+	}
 
-	public Double getPreco() {return preco;}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
-	public void setPreco(Double preco) {this.preco = preco;}
+	public Brand getBrand() {
+		return brand;
+	}
 
-	public List<Review> getReviews() {return reviews;}
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
 
-	public void setReviews(List<Review> reviews) {this.reviews = reviews;}
+	public Type getType() {
+		return type;
+	}
 
-	public List<Comment> getComments() {return comments;}
+	public void setType(Type type) {
+		this.type = type;
+	}
 
-	public void setComments(List<Comment> comments) {this.comments = comments;}
+	public Category getCategory() {
+		return category;
+	}
 
-	public Type getType() {return type;}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
-	public void setType(Type type) {this.type = type;}
-	
-	
+	public Shop getShop() {
+		return shop;
+	}
 
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 }

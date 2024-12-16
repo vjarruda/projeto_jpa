@@ -1,6 +1,6 @@
 package br.com.AulaJPA.persistence;
 
-import br.com.AulaJPA.entities.AverageRate;
+import br.com.AulaJPA.entities.Shop;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,18 +11,18 @@ public class AverageRateDAO {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-basic");
     EntityManager em = emf.createEntityManager();
 
-    public void salvar(AverageRate averageRate) {
+    public void salvar(Shop shop) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(averageRate);
+        em.persist(shop);
         em.getTransaction().commit();
         em.close();
     }
 
-    public void atualizar(AverageRate averageRate) {
+    public void atualizar(Shop shop) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.merge(averageRate);
+        em.merge(shop);
         em.getTransaction().commit();
         em.close();
     }
@@ -30,25 +30,25 @@ public class AverageRateDAO {
     public void remover(Long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        AverageRate averageRate = em.find(AverageRate.class, id);
-        if(averageRate != null) {
-            em.remove(averageRate);
+        Shop shop = em.find(Shop.class, id);
+        if(shop != null) {
+            em.remove(shop);
         }
         em.getTransaction().commit();
         em.close();
     }
 
-    public List<AverageRate> listar() {
+    public List<Shop> listar() {
         EntityManager em = emf.createEntityManager();
-        List<AverageRate> averageRates = em.createQuery("FROM AverageRate", AverageRate.class).getResultList();
+        List<Shop> shops = em.createQuery("FROM AverageRate", Shop.class).getResultList();
         em.close();
-        return averageRates;
+        return shops;
     }
 
-    public AverageRate buscarPorId(Long id) {
+    public Shop buscarPorId(Long id) {
         EntityManager em = emf.createEntityManager();
-        AverageRate averageRate  = em.find(AverageRate.class, id);
+        Shop shop = em.find(Shop.class, id);
         em.close();
-        return averageRate;
+        return shop;
     }
 }

@@ -4,14 +4,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Brand {
+public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
+    private String cnpj;
 
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
     private List<Product> products;
 
     public long getId() {
@@ -28,6 +29,14 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public List<Product> getProducts() {

@@ -1,6 +1,6 @@
 package br.com.AulaJPA.persistence;
 
-import br.com.AulaJPA.entities.Comment;
+import br.com.AulaJPA.entities.Category;
 
 import java.util.List;
 
@@ -12,18 +12,18 @@ public class CommentDAO {
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("crud-basic");
 	EntityManager em = emf.createEntityManager();
 	
-	public void salvar(Comment comment) {
+	public void salvar(Category category) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(comment);
+		em.persist(category);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public void atualizar(Comment comment) {
+	public void atualizar(Category category) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.merge(comment);
+		em.merge(category);
 		em.getTransaction().commit();
 		em.close();
 	}
@@ -31,25 +31,25 @@ public class CommentDAO {
 	public void remover(Long id) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Comment comment = em.find(Comment.class, id);
-		if(comment != null) {
-			em.remove(comment);
+		Category category = em.find(Category.class, id);
+		if(category != null) {
+			em.remove(category);
 		}
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public List<Comment> listar() {
+	public List<Category> listar() {
 		EntityManager em = emf.createEntityManager();
-		List<Comment> comments = em.createQuery("FROM Comment", Comment.class).getResultList();
+		List<Category> categories = em.createQuery("FROM Comment", Category.class).getResultList();
 		em.close();
-		return comments;
+		return categories;
 	}
 	
-	public Comment buscarPorId(Long id) {
+	public Category buscarPorId(Long id) {
 		EntityManager em = emf.createEntityManager();
-		Comment comment = em.find(Comment.class, id);
+		Category category = em.find(Category.class, id);
 		em.close();
-		return comment;
+		return category;
 	}
 }
