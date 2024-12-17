@@ -7,7 +7,7 @@ import br.com.AulaJPA.persistence.CategoryDAO;
 import br.com.AulaJPA.persistence.ShopDAO;
 import br.com.AulaJPA.persistence.TypeDAO;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainAnthony {
     public static void main(String[] args) {
@@ -17,72 +17,113 @@ public class MainAnthony {
         TypeDAO typeDAO = new TypeDAO();
         ProductDAO productDAO = new ProductDAO();
 
-        // Criar e salvar entidades auxiliares (Brand, Category, Shop, Type)
-        Brand brand = new Brand();
-        brand.setName("Apple");
-        brandDAO.salvar(brand);
+        Brand samsungBrand = new Brand();
+        samsungBrand.setName("Samsung");
+        brandDAO.salvar(samsungBrand);
 
-        Category category = new Category();
-        category.setName("Tecnologia");
-        categoryDAO.salvar(category);
+        Brand appleBrand = new Brand();
+        appleBrand.setName("Apple");
+        brandDAO.salvar(appleBrand);
 
-        Shop shop = new Shop();
-        shop.setName("Amazon");
-        shop.setCnpj("98765432109876");
-        shopDAO.salvar(shop);
+        Brand xaomiBrand = new Brand();
+        xaomiBrand.setName("Xaomi");
+        brandDAO.salvar(xaomiBrand);
 
-        Type type = new Type();
-        type.setName("Laptop");
-        typeDAO.salvar(type);
+        Category technologyCategory = new Category();
+        technologyCategory.setName("Technology");
+        categoryDAO.salvar(technologyCategory);
 
-        // Criar e salvar um produto
-        Product product = new Product();
-        product.setName("MacBook Pro 16");
-        product.setDescription("Laptop de alta performance");
-        product.setPrice(15000.00);
-        product.setBrand(brand);
-        product.setCategory(category);
-        product.setShop(shop);
-        product.setType(type);
-        productDAO.salvar(product);
+        Category foodCategory = new Category();
+        foodCategory.setName("Food");
+        categoryDAO.salvar(foodCategory);
+
+        Category cleaningCategory = new Category();
+        cleaningCategory.setName("Cleaning");
+        categoryDAO.salvar(cleaningCategory);
+
+        Type productType = new Type();
+        productType.setName("Product");
+        typeDAO.salvar(productType);
+
+        Type serviceType = new Type();
+        serviceType.setName("Service");
+        typeDAO.salvar(serviceType);
+
+        Shop amazonShop = new Shop();
+        amazonShop.setName("Amazon");
+        amazonShop.setCnpj("15.436.940/0001-03");
+        amazonShop.setProducts(new ArrayList<>());
+        shopDAO.salvar(amazonShop);
+
+        Shop americanasShop = new Shop();
+        americanasShop.setName("Americanas");
+        americanasShop.setCnpj("33.014.556/0098-19");
+        shopDAO.salvar(americanasShop);
+
+        Product samsungProduct = new Product();
+        samsungProduct.setName("Samsung S22");
+        samsungProduct.setDescription("SmartPhone");
+        samsungProduct.setPrice(3500.00);
+        samsungProduct.setBrand(samsungBrand);
+        samsungProduct.setCategory(technologyCategory);
+        samsungProduct.setShop(amazonShop);
+        samsungProduct.setType(productType);
+        productDAO.salvar(samsungProduct);
         System.out.println("Produto salvo com sucesso!");
 
-        // Atualizar o produto
-        product.setPrice(14500.00);
-        productDAO.atualizar(product);
-        System.out.println("Produto atualizado com sucesso!");
+        Product appleProduct = new Product();
+        appleProduct.setName("Apple XS");
+        appleProduct.setDescription("SmartPhone");
+        appleProduct.setPrice(15000.00);
+        appleProduct.setBrand(appleBrand);
+        appleProduct.setCategory(technologyCategory);
+        appleProduct.setShop(amazonShop);
+        appleProduct.setType(productType);
+        productDAO.salvar(appleProduct);
+        System.out.println("Produto salvo com sucesso!");
 
-        // Buscar o produto pelo ID
-        Product foundProduct = productDAO.buscarPorId(product.getId());
-        if (foundProduct != null) {
-            System.out.println("Produto encontrado: " + foundProduct.getName());
-            System.out.println("Descrição: " + foundProduct.getDescription());
-            System.out.println("Preço: " + foundProduct.getPrice());
-        } else {
-            System.out.println("Produto não encontrado!");
-        }
+        Product xaomiProduct = new Product();
+        xaomiProduct.setName("POCO F3 ");
+        xaomiProduct.setDescription("SmartPhone");
+        xaomiProduct.setPrice(1500.00);
+        xaomiProduct.setBrand(samsungBrand);
+        xaomiProduct.setCategory(technologyCategory);
+        xaomiProduct.setShop(amazonShop);
+        xaomiProduct.setType(productType);
+        productDAO.salvar(xaomiProduct);
+        System.out.println("Produto salvo com sucesso!");
 
-        // Listar todos os produtos
-        List<Product> products = productDAO.listar();
-        System.out.println("Lista de produtos:");
-        for (Product p : products) {
-            System.out.println("- " + p.getName() + ": " + p.getDescription() + " (R$ " + p.getPrice() + ")");
-        }
+        productType.setProducts(new ArrayList<>());
+        productType.getProducts().add(appleProduct);
+        productType.getProducts().add(xaomiProduct);
+        productType.getProducts().add(samsungProduct);
+        typeDAO.atualizar(productType);
 
-        // Remover o produto
-        productDAO.remover(product.getId());
-        System.out.println("Produto removido com sucesso!");
+        technologyCategory.setProducts(new ArrayList<>());
+        technologyCategory.getProducts().add(appleProduct);
+        technologyCategory.getProducts().add(xaomiProduct);
+        technologyCategory.getProducts().add(samsungProduct);
+        categoryDAO.atualizar(technologyCategory);
 
-        // Listar novamente para confirmar a remoção
-        products = productDAO.listar();
-        System.out.println("Lista de produtos após remoção:");
-        if (products.isEmpty()) {
-            System.out.println("Nenhum produto encontrado!");
-        } else {
-            for (Product p : products) {
-                System.out.println("- " + p.getName());
-            }
-        }
+        samsungBrand.setProducts(new ArrayList<>());
+        samsungBrand.getProducts().add(samsungProduct);
+        brandDAO.atualizar(samsungBrand);
+
+        xaomiBrand.setProducts(new ArrayList<>());
+        xaomiBrand.getProducts().add(xaomiProduct);
+        brandDAO.atualizar(xaomiBrand);
+
+        appleBrand.setProducts(new ArrayList<>());
+        appleBrand.getProducts().add(appleProduct);
+        brandDAO.atualizar(appleBrand);
+
+        amazonShop.setProducts(new ArrayList<>());
+        amazonShop.getProducts().add(appleProduct);
+        amazonShop.getProducts().add(xaomiProduct);
+        amazonShop.getProducts().add(samsungProduct);
+        shopDAO.atualizar(amazonShop);
+
+
     }
 }
 
