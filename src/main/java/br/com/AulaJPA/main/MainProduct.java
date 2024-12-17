@@ -1,25 +1,36 @@
 package br.com.AulaJPA.main;
 
 import br.com.AulaJPA.entities.*;
-import br.com.AulaJPA.persistence.ProductDAO;
+import br.com.AulaJPA.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainProduct {
 	public static void main(String[] args) {
+		ProductDAO productDAO = new ProductDAO();
+		BrandDAO brandDAO = new BrandDAO();
+		CategoryDAO categoryDAO = new CategoryDAO();
+		ReviewDAO reviewDAO = new ReviewDAO();
+		ShopDAO shopDAO = new ShopDAO();
+		TypeDAO typeDAO = new TypeDAO();
+
 		Brand brand = new Brand();
 		brand.setName("Samsung");
+		brandDAO.salvar(brand);
 
 		Category category = new Category();
 		category.setName("Eletrônicos");
+		categoryDAO.salvar(category);
 
 		Shop shop = new Shop();
 		shop.setName("Magalu");
 		shop.setCnpj("12345678901234");
+		shopDAO.salvar(shop);
 
 		Type type = new Type();
 		type.setName("Smartphone");
+		typeDAO.salvar(type);
 
 		Product product = new Product();
 		product.setName("Smartphone X");
@@ -29,6 +40,8 @@ public class MainProduct {
 		product.setCategory(category);
 		product.setShop(shop);
 		product.setType(type);
+
+		productDAO.salvar(product);
 
 		Review review1 = new Review();
 		review1.setName("Vini");
@@ -42,15 +55,13 @@ public class MainProduct {
 		review2.setRating(4);
 		review2.setProduct(product);
 
+		reviewDAO.salvar(review1);
+		reviewDAO.salvar(review2);
+
 		List<Review> reviews = new ArrayList<>();
 		reviews.add(review1);
 		reviews.add(review2);
 		product.setReviews(reviews);
-
-		ProductDAO productDAO = new ProductDAO();
-
-		productDAO.salvar(product);
-		System.out.println("Produto salvo com sucesso!");
 
 		List<Product> products = productDAO.listar();
 		System.out.println("Lista de produtos:");
