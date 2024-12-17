@@ -40,7 +40,7 @@ public class ShopDAO {
 
     public List<Shop> listar() {
         EntityManager em = emf.createEntityManager();
-        List<Shop> shops = em.createQuery("FROM AverageRate", Shop.class).getResultList();
+        List<Shop> shops = em.createQuery("FROM Shop", Shop.class).getResultList();
         em.close();
         return shops;
     }

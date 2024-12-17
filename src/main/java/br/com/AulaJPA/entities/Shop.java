@@ -12,7 +12,7 @@ public class Shop {
     private String name;
     private String cnpj;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Product> products;
 
     public long getId() {

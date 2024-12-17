@@ -41,7 +41,7 @@ public class CategoryDAO {
 	
 	public List<Category> listar() {
 		EntityManager em = emf.createEntityManager();
-		List<Category> categories = em.createQuery("FROM Comment", Category.class).getResultList();
+		List<Category> categories = em.createQuery("FROM Category", Category.class).getResultList();
 		em.close();
 		return categories;
 	}
