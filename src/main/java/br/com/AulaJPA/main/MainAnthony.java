@@ -1,23 +1,27 @@
 package br.com.AulaJPA.main;
 
 import br.com.AulaJPA.entities.*;
-import br.com.AulaJPA.persistence.ProductDAO;
-import br.com.AulaJPA.persistence.BrandDAO;
-import br.com.AulaJPA.persistence.CategoryDAO;
-import br.com.AulaJPA.persistence.ShopDAO;
-import br.com.AulaJPA.persistence.TypeDAO;
+import br.com.AulaJPA.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainAnthony {
     public static void main(String[] args) {
         BrandDAO brandDAO = new BrandDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
-        ShopDAO shopDAO = new ShopDAO();
         TypeDAO typeDAO = new TypeDAO();
         ProductDAO productDAO = new ProductDAO();
+        ShopDAO shopDAO = new ShopDAO();
 
+
+        //criarBanco(brandDAO, categoryDAO, shopDAO, typeDAO, productDAO);
+        listarProdutosTodasLojas(shopDAO);
+        listarProdutosUmaLoja(shopDAO, 1L);
+    }
+
+    private static void criarBanco(BrandDAO brandDAO, CategoryDAO categoryDAO, ShopDAO shopDAO, TypeDAO typeDAO, ProductDAO productDAO) {
         Brand samsungBrand = new Brand();
         samsungBrand.setName("Samsung");
         brandDAO.salvar(samsungBrand);
@@ -26,9 +30,9 @@ public class MainAnthony {
         appleBrand.setName("Apple");
         brandDAO.salvar(appleBrand);
 
-        Brand xaomiBrand = new Brand();
-        xaomiBrand.setName("Xaomi");
-        brandDAO.salvar(xaomiBrand);
+        Brand xiaomiBrand = new Brand();
+        xiaomiBrand.setName("Xiaomi");
+        brandDAO.salvar(xiaomiBrand);
 
         Category technologyCategory = new Category();
         technologyCategory.setName("Technology");
@@ -70,7 +74,7 @@ public class MainAnthony {
         samsungProduct.setShop(amazonShop);
         samsungProduct.setType(productType);
         productDAO.salvar(samsungProduct);
-        System.out.println("Produto salvo com sucesso!");
+        System.out.println("Produto salvo com sucesso na Amazon!");
 
         Product appleProduct = new Product();
         appleProduct.setName("Apple XS");
@@ -81,85 +85,126 @@ public class MainAnthony {
         appleProduct.setShop(amazonShop);
         appleProduct.setType(productType);
         productDAO.salvar(appleProduct);
-        System.out.println("Produto salvo com sucesso!");
+        System.out.println("Produto salvo com sucesso na Amazon!");
 
-        Product xaomiProduct = new Product();
-        xaomiProduct.setName("POCO F3 ");
-        xaomiProduct.setDescription("SmartPhone");
-        xaomiProduct.setPrice(1500.00);
-        xaomiProduct.setBrand(samsungBrand);
-        xaomiProduct.setCategory(technologyCategory);
-        xaomiProduct.setShop(amazonShop);
-        xaomiProduct.setType(productType);
-        productDAO.salvar(xaomiProduct);
-        System.out.println("Produto salvo com sucesso!");
+        Product xiaomiProduct = new Product();
+        xiaomiProduct.setName("POCO F3 ");
+        xiaomiProduct.setDescription("SmartPhone");
+        xiaomiProduct.setPrice(1500.00);
+        xiaomiProduct.setBrand(xiaomiBrand);
+        xiaomiProduct.setCategory(technologyCategory);
+        xiaomiProduct.setShop(amazonShop);
+        xiaomiProduct.setType(productType);
+        productDAO.salvar(xiaomiProduct);
+        System.out.println("Produto salvo com sucesso na Amazon!");
+
+        Product samsungTv = new Product();
+        samsungTv.setName("Samsung QLED 65");
+        samsungTv.setDescription("Smart TV 4K UHD");
+        samsungTv.setPrice(4000.00);
+        samsungTv.setBrand(samsungBrand);
+        samsungTv.setCategory(technologyCategory);
+        samsungTv.setShop(americanasShop);
+        samsungTv.setType(productType);
+        productDAO.salvar(samsungTv);
+        System.out.println("Produto salvo com sucesso na Americanas!");
+
+        Product appleWatch = new Product();
+        appleWatch.setName("Apple Watch Series 7");
+        appleWatch.setDescription("Smartwatch Apple");
+        appleWatch.setPrice(2500.00);
+        appleWatch.setBrand(appleBrand);
+        appleWatch.setCategory(technologyCategory);
+        appleWatch.setShop(americanasShop);
+        appleWatch.setType(productType);
+        productDAO.salvar(appleWatch);
+        System.out.println("Produto salvo com sucesso na Americanas!");
+
+        Product xiaomiVacuum = new Product();
+        xiaomiVacuum.setName("Xiaomi Vacuum Cleaner");
+        xiaomiVacuum.setDescription("Robô aspirador inteligente");
+        xiaomiVacuum.setPrice(1200.00);
+        xiaomiVacuum.setBrand(xiaomiBrand);
+        xiaomiVacuum.setCategory(technologyCategory);
+        xiaomiVacuum.setShop(americanasShop);
+        xiaomiVacuum.setType(productType);
+        productDAO.salvar(xiaomiVacuum);
+        System.out.println("Produto salvo com sucesso na Americanas!");
 
         productType.setProducts(new ArrayList<>());
         productType.getProducts().add(appleProduct);
-        productType.getProducts().add(xaomiProduct);
+        productType.getProducts().add(xiaomiProduct);
         productType.getProducts().add(samsungProduct);
+        productType.getProducts().add(samsungTv);
+        productType.getProducts().add(appleWatch);
+        productType.getProducts().add(xiaomiVacuum);
         typeDAO.atualizar(productType);
 
         technologyCategory.setProducts(new ArrayList<>());
         technologyCategory.getProducts().add(appleProduct);
-        technologyCategory.getProducts().add(xaomiProduct);
+        technologyCategory.getProducts().add(xiaomiProduct);
         technologyCategory.getProducts().add(samsungProduct);
+        technologyCategory.getProducts().add(samsungTv);
+        technologyCategory.getProducts().add(appleWatch);
+        technologyCategory.getProducts().add(xiaomiVacuum);
         categoryDAO.atualizar(technologyCategory);
 
         samsungBrand.setProducts(new ArrayList<>());
         samsungBrand.getProducts().add(samsungProduct);
+        samsungBrand.getProducts().add(samsungTv);
         brandDAO.atualizar(samsungBrand);
 
-        xaomiBrand.setProducts(new ArrayList<>());
-        xaomiBrand.getProducts().add(xaomiProduct);
-        brandDAO.atualizar(xaomiBrand);
+        xiaomiBrand.setProducts(new ArrayList<>());
+        xiaomiBrand.getProducts().add(xiaomiProduct);
+        xiaomiBrand.getProducts().add(xiaomiVacuum);
+        brandDAO.atualizar(xiaomiBrand);
 
         appleBrand.setProducts(new ArrayList<>());
         appleBrand.getProducts().add(appleProduct);
+        appleBrand.getProducts().add(appleWatch);
         brandDAO.atualizar(appleBrand);
 
         amazonShop.setProducts(new ArrayList<>());
         amazonShop.getProducts().add(appleProduct);
-        amazonShop.getProducts().add(xaomiProduct);
+        amazonShop.getProducts().add(xiaomiProduct);
         amazonShop.getProducts().add(samsungProduct);
         shopDAO.atualizar(amazonShop);
 
+        americanasShop.setProducts(new ArrayList<>());
+        americanasShop.getProducts().add(samsungTv);
+        americanasShop.getProducts().add(appleWatch);
+        americanasShop.getProducts().add(xiaomiVacuum);
+        shopDAO.atualizar(americanasShop);
 
-        List<Shop> shops = shopDAO.listar();
-        System.out.println("\nLista de todos produtos:");
-        for (Shop shop : shops) {
-           List<Product> products = shop.getProducts();
-            for (Product product : products){
-                System.out.println(
-                        product.getId()+" | "+
-                        product.getName()+" | "+
-                        product.getBrand().getName()+" | "+
-                        product.getCategory().getName()+" | "+
-                        product.getType().getName()+" | "+
-                        "R$"+product.getPrice()+" | "+
-                        product.getDescription());
-            }
-        }
-
-//        System.out.println("\nAtualizando uma Review...");
-//        review2.setComment("Mudei de opinião, produto excelente!!");
-//        review2.setRating(5);
-//        reviewDAO.atualizar(review2);
-//
-//        System.out.println("\nReviews após atualização:");
-//        for (Review r : reviewDAO.listar()) {
-//            System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
-//        }
-//
-//        System.out.println("\nRemovendo a Review de Anthony");
-//        reviewDAO.remover(review2.getId());
-//
-//        System.out.println("\nReviews após remoção:");
-//        for (Review r : reviewDAO.listar()) {
-//            System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
-//        }
-
+        System.out.println("Banco criado e dados salvos com sucesso!");
 
     }
-}
 
+    private static void listarProdutosUmaLoja(ShopDAO shopDAO, Long id) {
+        Shop foundShop = shopDAO.buscarPorId(id);
+        System.out.println("Loja "+foundShop.getName());
+        for (Product product : foundShop.getProducts()) {
+            System.out.println(product.getName());
+        }
+    }
+
+    private static void listarProdutosTodasLojas(ShopDAO shopDAO) {
+        List<Shop> shops = shopDAO.listar();
+        System.out.println("\nLista de lojas e seus produtos:");
+        for (Shop shop : shops) {
+            System.out.println("Loja: " + shop.getId() + " " + shop.getName());
+            List<Product> products = shop.getProducts();
+            for (Product product : products) {
+                System.out.println(
+                        product.getId() + " | " +
+                                product.getName() + " | " +
+                                product.getBrand().getName() + " | " +
+                                product.getCategory().getName() + " | " +
+                                product.getType().getName() + " | " +
+                                "R$" + product.getPrice() + " | " +
+                                product.getDescription()
+                );
+            }
+        }
+    }
+}
