@@ -35,7 +35,7 @@ public class MainProduct {
 		Product product = new Product();
 		product.setName("Smartphone X");
 		product.setDescription("Celular TOP");
-		product.setPrice(1200.00);
+		product.setPrice(2000.00);
 		product.setBrand(brand);
 		product.setCategory(category);
 		product.setShop(shop);
@@ -66,16 +66,30 @@ public class MainProduct {
 		List<Product> products = productDAO.listar();
 		System.out.println("Lista de produtos:");
 		for (Product p : products) {
-			System.out.println("- " + p.getName() + ": " + p.getDescription());
+			System.out.println("- " + p.getName() + ": " + p.getDescription() + " - Preço: R$" + p.getPrice());
+
+			// Imprimindo os reviews associados ao produto
+			if (p.getReviews() != null && !p.getReviews().isEmpty()) {
+				System.out.println("  Reviews:");
+				for (Review r : p.getReviews()) {
+					System.out.println("    - " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
+				}
+			} else {
+				System.out.println("  Sem reviews disponíveis.");
+			}
 		}
 
 		product.setPrice(1100.00);
 		productDAO.atualizar(product);
-		System.out.println("Produto atualizado com sucesso!");
-		
+		System.out.println("Produto atualizado com sucesso!"+ " Preço atualizado: R$" + product.getPrice());
+
+		productDAO.remover(product.getId());
+
 		Product foundProduct = productDAO.buscarPorId(product.getId());
 		if (foundProduct != null) {
 			System.out.println("Produto encontrado: " + foundProduct.getName());
+		}else{
+			System.out.println("Produto não existe");
 		}
 		
 		

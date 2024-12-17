@@ -29,7 +29,7 @@ public class Product {
 	@JoinColumn(name = "shop_id")
 	private Shop shop;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Review> reviews;
 
 	public long getId() {
