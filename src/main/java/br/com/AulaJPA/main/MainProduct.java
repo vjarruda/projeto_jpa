@@ -9,89 +9,55 @@ import java.util.List;
 public class MainProduct {
 	public static void main(String[] args) {
 		ProductDAO productDAO = new ProductDAO();
-		BrandDAO brandDAO = new BrandDAO();
-		CategoryDAO categoryDAO = new CategoryDAO();
 		ReviewDAO reviewDAO = new ReviewDAO();
-		ShopDAO shopDAO = new ShopDAO();
-		TypeDAO typeDAO = new TypeDAO();
-
-		Brand brand = new Brand();
-		brand.setName("Samsung");
-		brandDAO.salvar(brand);
-
-		Category category = new Category();
-		category.setName("Eletrônicos");
-		categoryDAO.salvar(category);
-
-		Shop shop = new Shop();
-		shop.setName("Magalu");
-		shop.setCnpj("12345678901234");
-		shopDAO.salvar(shop);
-
-		Type type = new Type();
-		type.setName("Smartphone");
-		typeDAO.salvar(type);
 
 		Product product = new Product();
 		product.setName("Smartphone X");
 		product.setDescription("Celular TOP");
 		product.setPrice(2000.00);
-		product.setBrand(brand);
-		product.setCategory(category);
-		product.setShop(shop);
-		product.setType(type);
-
 		productDAO.salvar(product);
 
+		System.out.println("Produto salvo: " + product.getName());
+
 		Review review1 = new Review();
-		review1.setName("Vini");
-		review1.setComment("Bom produto!");
+		review1.setName("Vinícius");
+		review1.setComment("Ótimo produto, muito rápido!");
 		review1.setRating(5);
 		review1.setProduct(product);
 
 		Review review2 = new Review();
 		review2.setName("Anthony");
-		review2.setComment("Produto ok");
-		review2.setRating(4);
+		review2.setComment("Não gostei muito");
+		review2.setRating(2);
 		review2.setProduct(product);
 
 		reviewDAO.salvar(review1);
 		reviewDAO.salvar(review2);
 
-		List<Review> reviews = new ArrayList<>();
-		reviews.add(review1);
-		reviews.add(review2);
-		product.setReviews(reviews);
+		System.out.println("\nReviews adicionadas ao produto " + product.getName());
 
-		List<Product> products = productDAO.listar();
-		System.out.println("Lista de produtos:");
-		for (Product p : products) {
-			System.out.println("- " + p.getName() + ": " + p.getDescription() + " - Preço: R$" + p.getPrice());
-
-			// Imprimindo os reviews associados ao produto
-			if (p.getReviews() != null && !p.getReviews().isEmpty()) {
-				System.out.println("  Reviews:");
-				for (Review r : p.getReviews()) {
-					System.out.println("    - " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
-				}
-			} else {
-				System.out.println("  Sem reviews disponíveis.");
-			}
+		List<Review> reviews = reviewDAO.listar();
+		System.out.println("\nLista de todas as Reviews:");
+		for (Review r : reviews) {
+			System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
 		}
 
-		product.setPrice(1100.00);
-		productDAO.atualizar(product);
-		System.out.println("Produto atualizado com sucesso!"+ " Preço atualizado: R$" + product.getPrice());
+		System.out.println("\nAtualizando uma Review...");
+		review2.setComment("Mudei de opinião, produto excelente!!");
+		review2.setRating(5);
+		reviewDAO.atualizar(review2);
 
-		productDAO.remover(product.getId());
-
-		Product foundProduct = productDAO.buscarPorId(product.getId());
-		if (foundProduct != null) {
-			System.out.println("Produto encontrado: " + foundProduct.getName());
-		}else{
-			System.out.println("Produto não existe");
+		System.out.println("\nReviews após atualização:");
+		for (Review r : reviewDAO.listar()) {
+			System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
 		}
-		
-		
+
+		System.out.println("\nRemovendo a Review de Anthony");
+		reviewDAO.remover(review2.getId());
+
+		System.out.println("\nReviews após remoção:");
+		for (Review r : reviewDAO.listar()) {
+			System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
+		}
 	}
 }
