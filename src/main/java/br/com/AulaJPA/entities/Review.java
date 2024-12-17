@@ -12,7 +12,7 @@ public class Review {
 	private String comment;
 	private Integer rating;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
 
