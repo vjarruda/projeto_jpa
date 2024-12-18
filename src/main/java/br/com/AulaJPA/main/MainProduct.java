@@ -17,8 +17,6 @@ public class MainProduct {
 		product.setPrice(2000.00);
 		productDAO.salvar(product);
 
-		System.out.println("Produto salvo: " + product.getName());
-
 		Review review1 = new Review();
 		review1.setName("Vinícius");
 		review1.setComment("Ótimo produto, muito rápido!");
@@ -31,29 +29,37 @@ public class MainProduct {
 		review2.setRating(2);
 		review2.setProduct(product);
 
+		List<Review> productReviews = new ArrayList<>();
+		productReviews.add(review1);
+		productReviews.add(review2);
+		product.setReviews(productReviews);
+
+		product.setReviews(productReviews);
 		reviewDAO.salvar(review1);
 		reviewDAO.salvar(review2);
+		System.out.println("Produto salvo com reviews associadas:");
+		System.out.println("- Nome: " + product.getName());
+		System.out.println("- Descrição: " + product.getDescription());
+		System.out.println("- Preço: R$ " + product.getPrice());
 
-		System.out.println("\nReviews adicionadas ao produto " + product.getName());
-
-		List<Review> reviews = reviewDAO.listar();
-		System.out.println("\nLista de todas as Reviews:");
-		for (Review r : reviews) {
-			System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
+		System.out.println("\nReviews associadas ao produto:");
+		for (Review review : product.getReviews()) {
+			System.out.println("- " + review.getName() + ": " + review.getComment() + " [Nota: " + review.getRating() + "]");
 		}
 
 		System.out.println("\nAtualizando uma Review...");
-		review2.setComment("Mudei de opinião, produto excelente!!");
-		review2.setRating(5);
-		reviewDAO.atualizar(review2);
+		Review reviewToUpdate = product.getReviews().get(1);
+		reviewToUpdate.setComment("Mudei de opinião, produto excelente!!");
+		reviewToUpdate.setRating(5);
+		reviewDAO.atualizar(reviewToUpdate);
 
 		System.out.println("\nReviews após atualização:");
 		for (Review r : reviewDAO.listar()) {
 			System.out.println("- " + r.getName() + ": " + r.getComment() + " [Nota: " + r.getRating() + "]");
 		}
 
-		System.out.println("\nRemovendo a Review de Anthony");
-		reviewDAO.remover(review2.getId());
+		System.out.println("\nRemovendo a Review de Anthony...");
+		reviewDAO.remover(reviewToUpdate.getId());
 
 		System.out.println("\nReviews após remoção:");
 		for (Review r : reviewDAO.listar()) {
