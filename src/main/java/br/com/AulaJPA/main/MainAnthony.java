@@ -4,7 +4,6 @@ import br.com.AulaJPA.entities.*;
 import br.com.AulaJPA.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainAnthony {
@@ -15,10 +14,11 @@ public class MainAnthony {
         ProductDAO productDAO = new ProductDAO();
         ShopDAO shopDAO = new ShopDAO();
 
-
-        //criarBanco(brandDAO, categoryDAO, shopDAO, typeDAO, productDAO);
-        listarProdutosTodasLojas(shopDAO);
-        listarProdutosUmaLoja(shopDAO, 1L);
+        criarBanco(brandDAO, categoryDAO, shopDAO, typeDAO, productDAO);
+        //removeShop(shopDAO, 3L);
+        //removeShop(shopDAO, 4L);
+        //listarProdutosTodasLojas(shopDAO);
+        //listarProdutosUmaLoja(shopDAO,  2L);
     }
 
     private static void criarBanco(BrandDAO brandDAO, CategoryDAO categoryDAO, ShopDAO shopDAO, TypeDAO typeDAO, ProductDAO productDAO) {
@@ -59,6 +59,10 @@ public class MainAnthony {
         amazonShop.setCnpj("15.436.940/0001-03");
         amazonShop.setProducts(new ArrayList<>());
         shopDAO.salvar(amazonShop);
+
+
+        //updateShop(shopDAO, amazonShop);
+
 
         Shop americanasShop = new Shop();
         americanasShop.setName("Americanas");
@@ -122,7 +126,7 @@ public class MainAnthony {
 
         Product xiaomiVacuum = new Product();
         xiaomiVacuum.setName("Xiaomi Vacuum Cleaner");
-        xiaomiVacuum.setDescription("Robô aspirador inteligente");
+        xiaomiVacuum.setDescription("RobÃ´ aspirador inteligente");
         xiaomiVacuum.setPrice(1200.00);
         xiaomiVacuum.setBrand(xiaomiBrand);
         xiaomiVacuum.setCategory(technologyCategory);
@@ -186,6 +190,16 @@ public class MainAnthony {
         for (Product product : foundShop.getProducts()) {
             System.out.println(product.getName());
         }
+    }
+
+    private static void removeShop(ShopDAO shopDAO, Long id){
+        shopDAO.remover(id);
+    }
+
+    private static void updateShop (ShopDAO shopDAO, Shop shop){
+        shop.setName("Mercado Livre");
+        shop.setCnpj("03.361.252/0001-34");
+        shopDAO.atualizar(shop);
     }
 
     private static void listarProdutosTodasLojas(ShopDAO shopDAO) {
