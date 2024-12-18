@@ -14,11 +14,13 @@ public class MainAnthony {
         ProductDAO productDAO = new ProductDAO();
         ShopDAO shopDAO = new ShopDAO();
 
-        criarBanco(brandDAO, categoryDAO, shopDAO, typeDAO, productDAO);
-        //removeShop(shopDAO, 3L);
-        //removeShop(shopDAO, 4L);
-        //listarProdutosTodasLojas(shopDAO);
+        //criarBanco(brandDAO, categoryDAO, shopDAO, typeDAO, productDAO);
+        //removeShop(shopDAO, 1L);
+        //removeShop(shopDAO, 2L);
+        updateShop(shopDAO, 1L);
+        listarProdutosTodasLojas(shopDAO);
         //listarProdutosUmaLoja(shopDAO,  2L);
+
     }
 
     private static void criarBanco(BrandDAO brandDAO, CategoryDAO categoryDAO, ShopDAO shopDAO, TypeDAO typeDAO, ProductDAO productDAO) {
@@ -59,10 +61,6 @@ public class MainAnthony {
         amazonShop.setCnpj("15.436.940/0001-03");
         amazonShop.setProducts(new ArrayList<>());
         shopDAO.salvar(amazonShop);
-
-
-        //updateShop(shopDAO, amazonShop);
-
 
         Shop americanasShop = new Shop();
         americanasShop.setName("Americanas");
@@ -196,10 +194,13 @@ public class MainAnthony {
         shopDAO.remover(id);
     }
 
-    private static void updateShop (ShopDAO shopDAO, Shop shop){
-        shop.setName("Mercado Livre");
-        shop.setCnpj("03.361.252/0001-34");
-        shopDAO.atualizar(shop);
+    private static void updateShop (ShopDAO shopDAO, Long id){
+        Shop foundShop = shopDAO.buscarPorId(id);
+        System.out.println("Loja: "+foundShop.getName()+" "+foundShop.getCnpj());
+        foundShop.setName("Mercado Livre");
+        foundShop.setCnpj("03.361.252/0001-34");
+        shopDAO.atualizar(foundShop);
+        System.out.println("Loja: "+foundShop.getName()+" "+foundShop.getCnpj());
     }
 
     private static void listarProdutosTodasLojas(ShopDAO shopDAO) {
